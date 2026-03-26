@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Lawyers Responsive Badge Redesign</title>
+    <!-- Tailwind for the presentation layout only -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* ============================================================
+           CORE RESPONSIVE BADGE CSS (WHAT THE TEAM NEEDS TO COPY)
+           ============================================================ */
+
+        /* The wrapper establishes a Container Query context. */
+        .slbadge-v4-embed {
+            container-type: inline-size;
+            width: 100%;
+            display: block;
+        }
+
+        /* Original Classes restored. Uses `cqi` (Container Query Inline) units. */
+        .slbadge-v4 {
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            text-decoration: none;
+            color: #404040;
+            background: #fff;
+            border: 1px solid #404040;
+            border-radius: 15cqi;     
+            padding: 4cqi;            
+            aspect-ratio: 1 / 1.05;   
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .slbadge-v4:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        .slbadge-v4 * { box-sizing: border-box; }
+
+        .slbadge-v4 .inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            border: 2px solid #404040;
+            border-radius: 11.25cqi;
+            height: 100%;
+            position: relative;
+        }
+
+        .slbadge-v4 .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            width: 100%;
+            padding: 4cqi 0;
+        }
+
+        .slbadge-v4 .text-uppercase {
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 5cqi;
+            line-height: 1.2;
+        }
+
+        .slbadge-v4 .logo {
+            width: 72%;
+            border-bottom: 2px solid #404040;
+            padding-bottom: 3.5cqi;
+            margin-top: 2.5cqi;
+            margin-bottom: 2.5cqi;
+            display: flex;
+            justify-content: center;
+        }
+
+        .slbadge-v4 .logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        .slbadge-v4 .rising-stars {
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 5cqi;
+            line-height: 1;
+        }
+
+        /* The Name Band. Fixed margin/width issue to perfectly hit edges at ALL scales */
+        .slbadge-v4 .name {
+            background: #404040;
+            color: #fff;
+            align-self: center; /* Replaces margin-left for perfect centering */
+            width: calc(100% + 8cqi + 4px); /* Perfectly bridges the inner borders and outer padding */
+            text-align: center;
+            font-weight: 700;
+            font-size: 7.5cqi;   
+            padding: 3cqi 2cqi;
+            line-height: 1.2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 25cqi;   
+        }
+
+        .slbadge-v4 .year-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            padding: 2cqi;
+        }
+
+        .slbadge-v4 .year {
+            font-weight: 700;
+            font-size: 11cqi;
+        }
+
+        /* Syntax highlighting for code blocks */
+        pre { background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; font-size: 0.875rem; }
+        code .text-blue { color: #60a5fa; }
+        code .text-green { color: #4ade80; }
+        code .text-yellow { color: #facc15; }
+        code .text-gray { color: #94a3b8; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen text-gray-800 font-sans p-6 md:p-12">
+
+    <div class="max-w-5xl mx-auto space-y-12">
+        
+        <!-- Header -->
+        <header class="border-b border-gray-200 pb-6">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">Super Lawyers Badge: Responsive Redesign</h1>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl">
+                The current embed relies on hardcoded pixel heights and font sizes, causing text to spill out of the badge when placed in constrained columns. 
+                This proposal refactors the badge using modern <strong>CSS Container Queries (<code class="bg-gray-200 px-1 rounded text-sm">cqi</code> units)</strong> and the <strong>exact original class names</strong>. The badge now scales proportionally—just like an SVG or image—while remaining fully clickable, accessible HTML text.
+            </p>
+        </header>
+
+        <!-- SECTION 1: INTERACTIVE DEMO -->
+        <section class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+            <h2 class="text-2xl font-bold mb-2">Interactive Scaling Demo</h2>
+            <p class="text-gray-600 mb-8">Use the slider to change the width of the parent container. Notice how the fonts, padding, and border radii recalculate flawlessly in real-time.</p>
+            
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                
+                <!-- Controls -->
+                <div class="w-full md:w-1/2 bg-gray-50 p-6 rounded-xl border border-gray-100">
+                    <label for="widthSlider" class="block text-sm font-semibold text-gray-700 mb-2">
+                        Container Width: <span id="widthValue" class="text-blue-600 font-bold text-lg ml-1">200px</span>
+                    </label>
+                    <input type="range" id="widthSlider" min="100" max="400" value="200" class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                    
+                    <ul class="mt-6 space-y-2 text-sm text-gray-600 list-disc list-inside">
+                        <li>Uses original `slbadge` class architecture.</li>
+                        <li>Font sizes adjust perfectly.</li>
+                        <li>Overhanging `.name` band calculates exact width to edge.</li>
+                        <li>Corners maintain proportional rounding.</li>
+                        <li>Height scales dynamically to maintain aspect ratio.</li>
+                    </ul>
+                </div>
+
+                <!-- Live Preview Area -->
+                <div class="w-full md:w-1/2 flex justify-center items-center min-h-[450px] bg-checkerboard rounded-xl border-2 border-dashed border-gray-300 p-4 relative">
+                    <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px;"></div>
+                    
+                    <!-- The Interactive Container -->
+                    <div id="interactiveContainer" style="width: 200px; transition: width 0.05s linear;" class="relative z-10">
+                        
+                        <!-- BEGIN SUPER LAWYERS RESPONSIVE BADGE -->
+                        <div class="slbadge-v4-embed">
+                            <a target="_blank" href="https://profiles.superlawyers.com/california/tustin/lawyer/ali-komaili/b45c8690-7418-4082-8b42-d3613b9b665a.html" class="slbadge-v4 atty-free monochrome">
+                                <div class="inner">
+                                    <div class="logo-container rs">
+                                        <span class="text-uppercase">Rated by</span>
+                                        <div class="logo">
+                                            <img src="https://cdn.superlawyers.com/image/upload/fl_sanitize/v1587594900/resources/shared/superlawyers-logo-ib.svg" alt="Super Lawyers logo">
+                                        </div>
+                                        <span class="rising-stars">Rising Stars</span>
+                                    </div>
+                                    <span class="name">Ali Komaili</span>
+                                    <div class="year-container">
+                                        <span class="year">2022</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- END BADGE -->
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: STATIC WIDTH EXAMPLES -->
+        <section class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+            <h2 class="text-2xl font-bold mb-2">Static Width Constraints</h2>
+            <p class="text-gray-600 mb-8">When placed in strict columns, the wrappers obey their max/min widths exactly without flexbox distortion.</p>
+            
+            <div class="flex flex-wrap justify-center items-end gap-10">
+                
+                <!-- 250px Layout -->
+                <div class="flex flex-col items-center shrink-0">
+                    <span class="text-sm font-bold text-gray-500 mb-3">250px Width</span>
+                    <div style="width: 250px;">
+                        <div class="slbadge-v4-embed">
+                            <a target="_blank" href="#" class="slbadge-v4 atty-free monochrome">
+                                <div class="inner">
+                                    <div class="logo-container rs">
+                                        <span class="text-uppercase">Rated by</span>
+                                        <div class="logo">
+                                            <img src="https://cdn.superlawyers.com/image/upload/fl_sanitize/v1587594900/resources/shared/superlawyers-logo-ib.svg" alt="Super Lawyers logo">
+                                        </div>
+                                        <span class="rising-stars">Rising Stars</span>
+                                    </div>
+                                    <span class="name">Ali Komaili</span>
+                                    <div class="year-container">
+                                        <span class="year">2022</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 200px Layout (Original) -->
+                <div class="flex flex-col items-center shrink-0">
+                    <span class="text-sm font-bold text-blue-600 mb-3">200px Width (Original)</span>
+                    <div style="width: 200px;">
+                        <div class="slbadge-v4-embed">
+                            <a target="_blank" href="#" class="slbadge-v4 atty-free monochrome">
+                                <div class="inner">
+                                    <div class="logo-container rs">
+                                        <span class="text-uppercase">Rated by</span>
+                                        <div class="logo">
+                                            <img src="https://cdn.superlawyers.com/image/upload/fl_sanitize/v1587594900/resources/shared/superlawyers-logo-ib.svg" alt="Super Lawyers logo">
+                                        </div>
+                                        <span class="rising-stars">Rising Stars</span>
+                                    </div>
+                                    <span class="name">Ali Komaili</span>
+                                    <div class="year-container">
+                                        <span class="year">2022</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 150px Layout -->
+                <div class="flex flex-col items-center shrink-0">
+                    <span class="text-sm font-bold text-gray-500 mb-3">150px Width</span>
+                    <div style="width: 150px;">
+                        <div class="slbadge-v4-embed">
+                            <a target="_blank" href="#" class="slbadge-v4 atty-free monochrome">
+                                <div class="inner">
+                                    <div class="logo-container rs">
+                                        <span class="text-uppercase">Rated by</span>
+                                        <div class="logo">
+                                            <img src="https://cdn.superlawyers.com/image/upload/fl_sanitize/v1587594900/resources/shared/superlawyers-logo-ib.svg" alt="Super Lawyers logo">
+                                        </div>
+                                        <span class="rising-stars">Rising Stars</span>
+                                    </div>
+                                    <span class="name">Ali Komaili</span>
+                                    <div class="year-container">
+                                        <span class="year">2022</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 100px Layout -->
+                <div class="flex flex-col items-center shrink-0">
+                    <span class="text-sm font-bold text-gray-500 mb-3">100px Width</span>
+                    <div style="width: 100px;">
+                        <div class="slbadge-v4-embed">
+                            <a target="_blank" href="#" class="slbadge-v4 atty-free monochrome">
+                                <div class="inner">
+                                    <div class="logo-container rs">
+                                        <span class="text-uppercase">Rated by</span>
+                                        <div class="logo">
+                                            <img src="https://cdn.superlawyers.com/image/upload/fl_sanitize/v1587594900/resources/shared/superlawyers-logo-ib.svg" alt="Super Lawyers logo">
+                                        </div>
+                                        <span class="rising-stars">Rising Stars</span>
+                                    </div>
+                                    <span class="name">Ali Komaili</span>
+                                    <div class="year-container">
+                                        <span class="year">2022</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: CODE SNIPPETS -->
+        <section class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+            <h2 class="text-2xl font-bold mb-6">Implementation Code</h2>
+            
+            <div class="mb-6">
+                <h3 class="text-lg font-bold mb-2">1. Original HTML Structure Preserved</h3>
+                <p class="text-sm text-gray-600 mb-3">The badge structure remains identical to the current implementation, utilizing the <code class="bg-gray-100 px-1 rounded">slbadge-v4-embed</code> wrapper to initialize the container query.</p>
+<pre><code><span class="text-blue">&lt;div</span> <span class="text-green">class=</span><span class="text-yellow">"slbadge-v4-embed"</span><span class="text-blue">&gt;</span>
+  <span class="text-blue">&lt;a</span> <span class="text-green">href=</span><span class="text-yellow">"https://..."</span> <span class="text-green">class=</span><span class="text-yellow">"slbadge-v4 atty-free monochrome"</span><span class="text-blue">&gt;</span>
+    <span class="text-blue">&lt;div</span> <span class="text-green">class=</span><span class="text-yellow">"inner"</span><span class="text-blue">&gt;</span>
+      <span class="text-blue">&lt;div</span> <span class="text-green">class=</span><span class="text-yellow">"logo-container rs"</span><span class="text-blue">&gt;</span>
+        <span class="text-blue">&lt;span</span> <span class="text-green">class=</span><span class="text-yellow">"text-uppercase"</span><span class="text-blue">&gt;</span>Rated by<span class="text-blue">&lt;/span&gt;</span>
+        <span class="text-blue">&lt;div</span> <span class="text-green">class=</span><span class="text-yellow">"logo"</span><span class="text-blue">&gt;</span>
+          <span class="text-blue">&lt;img</span> <span class="text-green">src=</span><span class="text-yellow">"..."</span> <span class="text-green">alt=</span><span class="text-yellow">"Super Lawyers logo"</span><span class="text-blue">&gt;</span>
+        <span class="text-blue">&lt;/div&gt;</span>
+        <span class="text-blue">&lt;span</span> <span class="text-green">class=</span><span class="text-yellow">"rising-stars"</span><span class="text-blue">&gt;</span>Rising Stars<span class="text-blue">&lt;/span&gt;</span>
+      <span class="text-blue">&lt;/div&gt;</span>
+      <span class="text-blue">&lt;span</span> <span class="text-green">class=</span><span class="text-yellow">"name"</span><span class="text-blue">&gt;</span>Ali Komaili<span class="text-blue">&lt;/span&gt;</span>
+      <span class="text-blue">&lt;div</span> <span class="text-green">class=</span><span class="text-yellow">"year-container"</span><span class="text-blue">&gt;</span>
+        <span class="text-blue">&lt;span</span> <span class="text-green">class=</span><span class="text-yellow">"year"</span><span class="text-blue">&gt;</span>2022<span class="text-blue">&lt;/span&gt;</span>
+      <span class="text-blue">&lt;/div&gt;</span>
+    <span class="text-blue">&lt;/div&gt;</span>
+  <span class="text-blue">&lt;/a&gt;</span>
+<span class="text-blue">&lt;/div&gt;</span></code></pre>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-bold mb-2">2. The CSS (Container Queries)</h3>
+                <p class="text-sm text-gray-600 mb-3">Copy this CSS. Notice the precise <code class="bg-gray-100 px-1 rounded">calc(100% + 8cqi + 4px)</code> on the <code class="bg-gray-100 px-1 rounded">.name</code> element. This ensures the band reaches the edges perfectly at all scales, replacing the fragile margin/percentage approach.</p>
+<pre><code>.slbadge-v4-embed { container-type: inline-size; width: 100%; display: block; }
+
+.slbadge-v4 {
+    display: flex; flex-direction: column; box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif; text-decoration: none;
+    color: #404040; background: #fff; border: 1px solid #404040;
+    border-radius: 15cqi; padding: 4cqi; aspect-ratio: 1 / 1.05;
+}
+
+.slbadge-v4 * { box-sizing: border-box; }
+
+.slbadge-v4 .inner {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: space-between; border: 2px solid #404040;
+    border-radius: 11.25cqi; height: 100%; position: relative;
+}
+
+.slbadge-v4 .logo-container {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; flex-grow: 1; width: 100%; padding: 4cqi 0;
+}
+
+.slbadge-v4 .text-uppercase { text-transform: uppercase; font-weight: 700; font-size: 5cqi; line-height: 1.2; }
+.slbadge-v4 .logo { width: 72%; border-bottom: 2px solid #404040; padding-bottom: 3.5cqi; margin: 2.5cqi 0; display: flex; justify-content: center; }
+.slbadge-v4 .logo img { width: 100%; height: auto; }
+.slbadge-v4 .rising-stars { text-transform: uppercase; font-weight: 700; font-size: 5cqi; line-height: 1; }
+
+<span class="text-gray">/* Perfect edge-to-edge alignment logic */</span>
+.slbadge-v4 .name {
+    background: #404040; color: #fff; align-self: center;
+    width: calc(100% + 8cqi + 4px); text-align: center; 
+    font-weight: 700; font-size: 7.5cqi; padding: 3cqi 2cqi; 
+    line-height: 1.2; display: flex; align-items: center; 
+    justify-content: center; min-height: 25cqi;
+}
+
+.slbadge-v4 .year-container {
+    display: flex; align-items: center; justify-content: center;
+    flex-grow: 1; padding: 2cqi;
+}
+
+.slbadge-v4 .year { font-weight: 700; font-size: 11cqi; }</code></pre>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Script for the interactive slider -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slider = document.getElementById('widthSlider');
+            const valueDisplay = document.getElementById('widthValue');
+            const container = document.getElementById('interactiveContainer');
+
+            slider.addEventListener('input', (e) => {
+                const newWidth = e.target.value;
+                valueDisplay.textContent = `${newWidth}px`;
+                container.style.width = `${newWidth}px`;
+            });
+        });
+    </script>
+</body>
+</html>
