@@ -37,7 +37,7 @@
 
         .slbadge-v4:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
         }
 
         .slbadge-v4 * { box-sizing: border-box; }
@@ -92,11 +92,11 @@
             line-height: 1;
         }
 
-        /* The Name Band. Fixed margin/width issue to perfectly hit edges at ALL scales */
+        /* The Name Band */
         .slbadge-v4 .name {
             background: #404040;
             color: #fff;
-            align-self: center; /* Replaces margin-left for perfect centering */
+            align-self: center; 
             width: calc(100% + 8cqi + 4px); /* Perfectly bridges the inner borders and outer padding */
             text-align: center;
             font-weight: 700;
@@ -123,41 +123,41 @@
         }
 
         /* Syntax highlighting for code blocks */
-        pre { background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; font-size: 0.875rem; }
+        pre { background: #0f172a; color: #e2e8f0; padding: 1.5rem; border-radius: 0.75rem; overflow-x: auto; font-size: 0.875rem; border: 1px solid #334155; }
         code .text-blue { color: #60a5fa; }
         code .text-green { color: #4ade80; }
         code .text-yellow { color: #facc15; }
-        code .text-gray { color: #94a3b8; }
+        code .text-gray { color: #64748b; }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen text-gray-800 font-sans p-6 md:p-12">
+<body class="bg-gray-900 min-h-screen text-gray-100 font-sans p-6 md:p-12">
 
     <div class="max-w-5xl mx-auto space-y-12">
         
         <!-- Header -->
-        <header class="border-b border-gray-200 pb-6">
-            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">Super Lawyers Badge: Responsive Redesign</h1>
-            <p class="mt-4 text-lg text-gray-600 max-w-3xl">
+        <header class="border-b border-gray-700 pb-6">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">Super Lawyers Badge: Responsive Redesign</h1>
+            <p class="mt-4 text-lg text-gray-400 max-w-3xl">
                 The current embed relies on hardcoded pixel heights and font sizes, causing text to spill out of the badge when placed in constrained columns. 
-                This proposal refactors the badge using modern <strong>CSS Container Queries (<code class="bg-gray-200 px-1 rounded text-sm">cqi</code> units)</strong> and the <strong>exact original class names</strong>. The badge now scales proportionally—just like an SVG or image—while remaining fully clickable, accessible HTML text.
+                This proposal refactors the badge using modern <strong>CSS Container Queries (<code class="bg-gray-800 border border-gray-700 px-1.5 py-0.5 rounded text-sm text-gray-200">cqi</code> units)</strong> and the <strong>exact original class names</strong>. The badge now scales proportionally—just like an SVG or image—while remaining fully clickable, accessible HTML text.
             </p>
         </header>
 
         <!-- SECTION 1: INTERACTIVE DEMO -->
-        <section class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-            <h2 class="text-2xl font-bold mb-2">Interactive Scaling Demo</h2>
-            <p class="text-gray-600 mb-8">Use the slider to change the width of the parent container. Notice how the fonts, padding, and border radii recalculate flawlessly in real-time.</p>
+        <section class="bg-gray-800 rounded-2xl shadow-xl border border-gray-700 p-8">
+            <h2 class="text-2xl font-bold mb-2 text-white">Interactive Scaling Demo</h2>
+            <p class="text-gray-400 mb-8">Use the slider to change the width of the parent container. Notice how the fonts, padding, and border radii recalculate flawlessly in real-time.</p>
             
             <div class="flex flex-col md:flex-row gap-12 items-center">
                 
                 <!-- Controls -->
-                <div class="w-full md:w-1/2 bg-gray-50 p-6 rounded-xl border border-gray-100">
-                    <label for="widthSlider" class="block text-sm font-semibold text-gray-700 mb-2">
-                        Container Width: <span id="widthValue" class="text-blue-600 font-bold text-lg ml-1">200px</span>
+                <div class="w-full md:w-1/2 bg-gray-900 p-6 rounded-xl border border-gray-700 shadow-inner">
+                    <label for="widthSlider" class="block text-sm font-semibold text-gray-300 mb-2">
+                        Container Width: <span id="widthValue" class="text-blue-400 font-bold text-lg ml-1">200px</span>
                     </label>
-                    <input type="range" id="widthSlider" min="100" max="400" value="200" class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                    <input type="range" id="widthSlider" min="100" max="400" value="200" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
                     
-                    <ul class="mt-6 space-y-2 text-sm text-gray-600 list-disc list-inside">
+                    <ul class="mt-6 space-y-2 text-sm text-gray-400 list-disc list-inside">
                         <li>Uses original `slbadge` class architecture.</li>
                         <li>Font sizes adjust perfectly.</li>
                         <li>Overhanging `.name` band calculates exact width to edge.</li>
@@ -167,8 +167,8 @@
                 </div>
 
                 <!-- Live Preview Area -->
-                <div class="w-full md:w-1/2 flex justify-center items-center min-h-[450px] bg-checkerboard rounded-xl border-2 border-dashed border-gray-300 p-4 relative">
-                    <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px;"></div>
+                <div class="w-full md:w-1/2 flex justify-center items-center min-h-[450px] bg-gray-900 rounded-xl border-2 border-dashed border-gray-700 p-4 relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(45deg, #374151 25%, transparent 25%), linear-gradient(-45deg, #374151 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #374151 75%), linear-gradient(-45deg, transparent 75%, #374151 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px;"></div>
                     
                     <!-- The Interactive Container -->
                     <div id="interactiveContainer" style="width: 200px; transition: width 0.05s linear;" class="relative z-10">
@@ -199,15 +199,15 @@
         </section>
 
         <!-- SECTION 2: STATIC WIDTH EXAMPLES -->
-        <section class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-            <h2 class="text-2xl font-bold mb-2">Static Width Constraints</h2>
-            <p class="text-gray-600 mb-8">When placed in strict columns, the wrappers obey their max/min widths exactly without flexbox distortion.</p>
+        <section class="bg-gray-800 rounded-2xl shadow-xl border border-gray-700 p-8">
+            <h2 class="text-2xl font-bold mb-2 text-white">Static Width Constraints</h2>
+            <p class="text-gray-400 mb-8">When placed in strict columns, the wrappers obey their max/min widths exactly without flexbox distortion.</p>
             
             <div class="flex flex-wrap justify-center items-end gap-10">
                 
                 <!-- 250px Layout -->
                 <div class="flex flex-col items-center shrink-0">
-                    <span class="text-sm font-bold text-gray-500 mb-3">250px Width</span>
+                    <span class="text-sm font-bold text-gray-400 mb-3">250px Width</span>
                     <div style="width: 250px;">
                         <div class="slbadge-v4-embed">
                             <a target="_blank" href="#" class="slbadge-v4 atty-free monochrome">
@@ -231,7 +231,7 @@
 
                 <!-- 200px Layout (Original) -->
                 <div class="flex flex-col items-center shrink-0">
-                    <span class="text-sm font-bold text-blue-600 mb-3">200px Width (Original)</span>
+                    <span class="text-sm font-bold text-blue-400 mb-3">200px Width (Original)</span>
                     <div style="width: 200px;">
                         <div class="slbadge-v4-embed">
                             <a target="_blank" href="#" class="slbadge-v4 atty-free monochrome">
@@ -255,7 +255,7 @@
 
                 <!-- 150px Layout -->
                 <div class="flex flex-col items-center shrink-0">
-                    <span class="text-sm font-bold text-gray-500 mb-3">150px Width</span>
+                    <span class="text-sm font-bold text-gray-400 mb-3">150px Width</span>
                     <div style="width: 150px;">
                         <div class="slbadge-v4-embed">
                             <a target="_blank" href="#" class="slbadge-v4 atty-free monochrome">
@@ -279,7 +279,7 @@
 
                 <!-- 100px Layout -->
                 <div class="flex flex-col items-center shrink-0">
-                    <span class="text-sm font-bold text-gray-500 mb-3">100px Width</span>
+                    <span class="text-sm font-bold text-gray-400 mb-3">100px Width</span>
                     <div style="width: 100px;">
                         <div class="slbadge-v4-embed">
                             <a target="_blank" href="#" class="slbadge-v4 atty-free monochrome">
@@ -305,12 +305,12 @@
         </section>
 
         <!-- SECTION 3: CODE SNIPPETS -->
-        <section class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-            <h2 class="text-2xl font-bold mb-6">Implementation Code</h2>
+        <section class="bg-gray-800 rounded-2xl shadow-xl border border-gray-700 p-8">
+            <h2 class="text-2xl font-bold mb-6 text-white">Implementation Code</h2>
             
-            <div class="mb-6">
-                <h3 class="text-lg font-bold mb-2">1. Original HTML Structure Preserved</h3>
-                <p class="text-sm text-gray-600 mb-3">The badge structure remains identical to the current implementation, utilizing the <code class="bg-gray-100 px-1 rounded">slbadge-v4-embed</code> wrapper to initialize the container query.</p>
+            <div class="mb-8">
+                <h3 class="text-lg font-bold mb-2 text-white">1. Original HTML Structure Preserved</h3>
+                <p class="text-sm text-gray-400 mb-4">The badge structure remains identical to the current implementation, utilizing the <code class="bg-gray-900 border border-gray-700 px-1.5 py-0.5 rounded text-gray-200">slbadge-v4-embed</code> wrapper to initialize the container query.</p>
 <pre><code><span class="text-blue">&lt;div</span> <span class="text-green">class=</span><span class="text-yellow">"slbadge-v4-embed"</span><span class="text-blue">&gt;</span>
   <span class="text-blue">&lt;a</span> <span class="text-green">href=</span><span class="text-yellow">"https://..."</span> <span class="text-green">class=</span><span class="text-yellow">"slbadge-v4 atty-free monochrome"</span><span class="text-blue">&gt;</span>
     <span class="text-blue">&lt;div</span> <span class="text-green">class=</span><span class="text-yellow">"inner"</span><span class="text-blue">&gt;</span>
@@ -331,8 +331,10 @@
             </div>
 
             <div>
-                <h3 class="text-lg font-bold mb-2">2. The CSS (Container Queries)</h3>
-                <p class="text-sm text-gray-600 mb-3">Copy this CSS. Notice the precise <code class="bg-gray-100 px-1 rounded">calc(100% + 8cqi + 4px)</code> on the <code class="bg-gray-100 px-1 rounded">.name</code> element. This ensures the band reaches the edges perfectly at all scales, replacing the fragile margin/percentage approach.</p>
+                <h3 class="text-lg font-bold mb-2 text-white">2. The CSS (Container Queries)</h3>
+                <p class="text-sm text-gray-400 mb-4 leading-relaxed">
+                    This is the complete, drop-in replacement CSS for the badge. Instead of relying on rigid, fixed pixel values (<code class="bg-gray-900 border border-gray-700 px-1 py-0.5 rounded text-gray-200">px</code>) and viewport-based units that break in constrained layouts, this new approach uses modern CSS Container Queries (<code class="bg-gray-900 border border-gray-700 px-1 py-0.5 rounded text-gray-200">container-type: inline-size</code>) and container query inline (<code class="bg-gray-900 border border-gray-700 px-1 py-0.5 rounded text-gray-200">cqi</code>) units. By establishing the <code class="bg-gray-900 border border-gray-700 px-1 py-0.5 rounded text-gray-200">.slbadge-v4-embed</code> wrapper as a container, every element inside—from font sizes and padding to border radii—dynamically calculates its size purely based on the width of that wrapper. This guarantees the badge remains perfectly proportioned and infinitely scalable, acting fluidly like an image while remaining highly accessible, SEO-friendly HTML text.
+                </p>
 <pre><code>.slbadge-v4-embed { container-type: inline-size; width: 100%; display: block; }
 
 .slbadge-v4 {
@@ -360,7 +362,6 @@
 .slbadge-v4 .logo img { width: 100%; height: auto; }
 .slbadge-v4 .rising-stars { text-transform: uppercase; font-weight: 700; font-size: 5cqi; line-height: 1; }
 
-<span class="text-gray">/* Perfect edge-to-edge alignment logic */</span>
 .slbadge-v4 .name {
     background: #404040; color: #fff; align-self: center;
     width: calc(100% + 8cqi + 4px); text-align: center; 
